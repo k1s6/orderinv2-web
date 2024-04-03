@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginMobileController;
+use App\Http\Controllers\MobileAPI\MobileUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => '/apimobileorderin'], function(){
+    Route::post('/login', [MobileUserController::class, 'signinEmail']);
+});
+
+// Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);

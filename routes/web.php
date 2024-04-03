@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginMobileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
 
@@ -24,3 +25,6 @@ Route::get('/chart/{id}',
 Route::get('/landingpage', function () {
     return view('landingpage');
 });
+
+ 
+// Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);

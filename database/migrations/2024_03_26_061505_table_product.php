@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('table_product', function (Blueprint $table) {
             $table->bigIncrements('kode_product');
             $table->String('nama_product',100)->nullable(false);
+            $table->text('deskripsi');
             $table->enum('stock_product', ['tersedia','habis'])->nullable(false);
             $table->integer('harga_product')->nullable(false);
             $table->enum('jenis_product', ['snack','makanan','steak','minuman'])->nullable(false);
