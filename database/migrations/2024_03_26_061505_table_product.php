@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('harga_product')->nullable(false);
             $table->enum('jenis_product', ['snack','makanan','steak','minuman'])->nullable(false);
             $table->String('gambar_product')->nullable(false);
+            $table->timestamps();
         });
     }
 

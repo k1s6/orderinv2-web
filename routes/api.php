@@ -23,7 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => '/apimobileorderin'], function(){
     Route::post('/login', [MobileUserController::class, 'signinEmail']);
-    Route::get('/dataproduct', [ProductController::class, 'getDataProduct']);
+    Route::get('/dataproduct/{jenis}', [ProductController::class, 'getDataProduct']);
+    Route::post('/uploadproduct/store', [ProductController::class, 'storeProduct']);
+    Route::put('/product/{id}', [ProductController::class, 'updateProduct']);
 });
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
