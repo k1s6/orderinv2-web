@@ -96,5 +96,21 @@ class ProductController extends Controller
     
         return response()->json(['status' => 'success', 'message' => 'Product updated successfully', 'data' => $product], 200);
     }
+
+    public function destroyProduct($id) {
+        // Cari produk berdasarkan ID
+    $product = Product::find($id);
+
+    // Periksa apakah produk ditemukan
+    if (!$product) {
+        return response()->json(['status' => 'fail', 'message' => 'Product not found'], 404);
+    }
+
+    // Hapus produk
+    $product->delete();
+
+    return response()->json(['status' => 'success', 'message' => 'Product deleted successfully'], 200);
+
+    }
     
 }

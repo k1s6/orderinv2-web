@@ -26,5 +26,12 @@ Route::get('/landingpage', function () {
     return view('landingpage');
 });
 
+Route::get('/daftarmenu', function() {
+    return view('daftarmakanan');
+});
+
+Route::get('/daftarmenu1', function() {
+    return view('daftarminuman');
+});
  
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
