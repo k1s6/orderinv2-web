@@ -123,10 +123,10 @@
                     <h1 class="display-4 fw-bolder text-black">Daftar Minuman</h1>
                     <!-- Kategori Menu Minuman -->
                     <nav class="menu">
-                        <button class="item food-item">Makanan</button>
-                        <button class="item snack-item">Snack</button>
-                        <button class="item drink-item">Minuman</button>
-                        <button class="item steak-item">Steak</button>
+                        <button class="item food-item" id="makananButton">Makanan</button>
+                        <button class="item snack-item" id="snackButton">Snack</button>
+                        <button class="item drink-item" id="minumanButton">Minuman</button>
+                        <button class="item steak-item" id="steakButton">Steak</button>
                     </nav>
                 </div>
             </div>
@@ -365,5 +365,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script>
+            document.getElementById("makananButton").addEventListener("click", function() {
+                window.location.href = "{{ route('daftarmakan') }}";
+            });
+        </script>
     </body>
 </html>

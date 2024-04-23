@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\LoginMobileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginMobileController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DaftarMakananController;
+use App\Http\Controllers\DaftarMinumanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ use App\Http\Controllers\TransactionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingpage');
 });
 
 Route::get('/chart/{id}', 
@@ -34,4 +36,10 @@ Route::get('/daftarmenu1', function() {
     return view('daftarminuman');
 });
  
+Route::get('/daftarmakan', [DaftarMakananController::class, 'index'])->name('daftarmakan');
+Route::get('/daftarminuman', [DaftarMinumanController::class, 'index'])->name('daftarminuman');
+
+// Route::get('/input-nama', [NamaController::class, 'tampilFormulir'])->name('input-nama');
+// Route::post('/submit-nama', [NamaController::class, 'simpanNama'])->name('submit-nama');
+
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);

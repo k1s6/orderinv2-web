@@ -57,12 +57,12 @@
                     <!-- To make this form functional, sign up at-->
                     <!-- https://startbootstrap.com/solution/contact-forms-->
                     <!-- to get an API token!-->
-                    <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <form action="{{ route('daftarmakan') }}" method="GET">
                         <!-- Nama input-->
                         <div class="row">
                             <div class="col">
-                                <input class="form-control form-control-lg text-center" id="fullName" type="text"
-                                    placeholder="Masukan nama kamu disini" data-sb-validations="required"
+                                <input class="form-control form-control-lg text-center" id="nama" type="text"
+                                    placeholder="Masukan nama kamu disini" 
                                     style="text-align: left;" />
                                 <!-- <div class="invalid-feedback text-white" data-sb-feedback="fullName:required">Full Name is required.</div> -->
                             </div>
@@ -70,8 +70,9 @@
                         <!-- button submit -->
                         <div class="row justify-content-center">
                             <div class="col-auto">
-                                <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton"
-                                        type="submit">Pesan</button></div>
+                                <div class="col-auto">
+                                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Pesan</button>
+                                </div>
                             </div>
                         </div>
                         <!-- Submit success message-->
@@ -88,7 +89,7 @@
                         <!-- Submit error message-->
                         <!---->
                         <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
+                        <!-- an error submitting the form -->
                         <div class="d-none" id="submitErrorMessage">
                             <div class="text-center text-danger mb-3">Error sending message!</div>
                         </div>
@@ -135,4 +136,10 @@
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script>
+        document.getElementById("submitButton").addEventListener("click", function() {
+            window.location.href = "{{ route('daftarmakan') }}";
+        });
+    </script>
+</body>
