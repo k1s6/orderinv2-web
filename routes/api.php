@@ -27,6 +27,7 @@ Route::group(['prefix' => '/apimobileorderin'], function(){
     Route::post('/uploadproduct/store', [ProductController::class, 'storeProduct']);
     Route::put('/product/{id}', [ProductController::class, 'updateProduct']);
     Route::get('/delproduct/{id}', [ProductController::class, 'destroyProduct']);
+    Route::get('/findproduct/{jenis}', [ProductController::class, 'searchProduct']);
 });
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
