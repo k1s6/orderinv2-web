@@ -37,39 +37,29 @@
                     <h4 class="mb-5">Happy with delicious food</h4>
                     <p>and get new experiences with asian food</p>
                 </div>
-                <!-- Signup form-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+
+                {{-- id="contactForm" data-sb-form-api-token="API_TOKEN" --}}
+                <form action="{{ route('landingpage.validate') }}" method="post" class="form-subscribe" >
                     <!-- Email address input-->
                     <div class="row">
                         <div class="col">
-                            <input class="form-control form-control-lg" id="fullName" type="text" placeholder="Nama Kamu Disini" data-sb-validations="required" />
-                            <!-- <div class="invalid-feedback text-white" data-sb-feedback="fullName:required">Full Name is required.</div> -->
+                            <input class="form-control form-control-lg" id="fullName" name="fullName" type="text" placeholder="Nama Kamu Disini" data-sb-validations="required" required/>
+                            <div class="invalid-feedback text-white" data-sb-feedback="fullName:required">Full Name is required.</div>
                         </div>
                     </div>
                     <!-- button submit -->
                     <div class="row justify-content-center">
                         <div class="col-auto">
-                            <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                            <div class="col-auto"><a href="{{ route('frontend.daftarmanakan') }}"  class="btn btn-primary btn-lg">Submit</a></div>
                         </div>
                     </div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your users will see when the form-->
-                    <!-- has successfully submitted
                     <div class="d-none" id="submitSuccessMessage">
                         <div class="text-center mb-3">
                             <div class="fw-bolder">Form submission successful!</div>
                             <p>To activate this form, sign up at</p>
                             <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div> -->
-                    <!-- </div> -->
+                        </div>
+                    </div>
                     <!-- Submit error message-->
                     <!---->
                     <!-- This is what your users will see when there is-->

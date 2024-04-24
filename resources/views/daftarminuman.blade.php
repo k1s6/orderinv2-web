@@ -123,11 +123,12 @@
                     <h1 class="display-4 fw-bolder text-black">Daftar Minuman</h1>
                     <!-- Kategori Menu Minuman -->
                     <nav class="menu">
-                        <button class="item food-item">Makanan</button>
-                        <button class="item snack-item">Snack</button>
-                        <button class="item drink-item">Minuman</button>
-                        <button class="item steak-item">Steak</button>
+                        <a href="{{ route('frontend.daftarmanakan') }}" class="item food-item text-decoration-none text-dark">Makanan</a>
+                        <a href="#" class="item snack-item text-decoration-none text-dark">Snack</a>
+                        <a href="{{ route('frontend.daftarminuman') }}" class="item drink-item text-decoration-none text-dark">Minuman</a>
+                        <a href="#" class="item steak-item text-decoration-none text-dark">Steak</a>
                     </nav>
+                    
                 </div>
             </div>
         </header>

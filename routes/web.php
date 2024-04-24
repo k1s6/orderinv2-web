@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\LoginMobileController;
+use App\Http\Controllers\MakananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
 
@@ -26,12 +28,12 @@ Route::get('/landingpage', function () {
     return view('landingpage');
 });
 
-Route::get('/daftarmenu', function() {
-    return view('daftarmakanan');
-});
+Route::post('/landingpage/validate', [LandingpageController::class, 'validateName'])->name('landingpage.validate');
+
+Route::get('/daftarmenu', [MakananController::class, 'index'])->name('frontend.daftarmanakan');
 
 Route::get('/daftarmenu1', function() {
     return view('daftarminuman');
-});
+})->name('frontend.daftarminuman');
  
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
