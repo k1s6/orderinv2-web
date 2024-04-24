@@ -123,7 +123,7 @@
                     <h1 class="display-4 fw-bolder text-black">Daftar Minuman</h1>
                     <!-- Kategori Menu Minuman -->
                     <nav class="menu">
-                        <button class="item food-item">Makanan</button>
+                        <a class="item food-item" href={{ route('daftarmakanan') }}>Makanan</a>
                         <button class="item snack-item">Snack</button>
                         <button class="item drink-item">Minuman</button>
                         <button class="item steak-item">Steak</button>
@@ -143,6 +143,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
+                                    
                                     <h5 class="fw-bolder">Jus Alpukat</h5>
                                     <!-- Product detail-->
                                     <p class="text-muted">Jus alpukat dengan tambahan susu coklat.</p>
@@ -211,7 +212,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="\assets\img\milky-caramel.jpg" alt="..." />
+                            <img class="card-img-top" src="assets\img\milky-caramel.jpg" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">

@@ -112,7 +112,7 @@
                     <nav class="menu">
                         <button class="item food-item">Makanan</button>
                         <button class="item drink-item">Snack</button>
-                        <button class="item drink-item">Minuman</button>
+                        <a class="item drink-item" href="{{ route('daftarminuman') }}">Minuman</a>
                         <button class="item steak-item">Steak</button>
                     </nav>
                 </div>
