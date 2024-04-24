@@ -120,9 +120,5 @@
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <script>
-        document.getElementById("submitButton").addEventListener("click", function() {
-            window.location.href = "{{ route('daftarmakan') }}";
-        });
-    </script>
+    
 </body>

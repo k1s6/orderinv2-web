@@ -128,7 +128,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="{{asset('asset/img/21c5ac87bcf3c2c74e8adfbcfeb6b82d.jpg')}}" alt="..." />
+                            <img class="card-img-top" src="asset/img/{{$food->gambar_product}}" alt="{{ $food->gambar_product }}" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
