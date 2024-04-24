@@ -113,4 +113,22 @@ class ProductController extends Controller
 
     }
     
+    public function searchProduct(Request $request, $jenis) {
+        $keyword = $request->input('keyword');
+        
+        // Pastikan jenis produk yang diminta valid
+        $validJenis = ['snack', 'makanan', 'steak', 'minuman'];
+        if (!in_array($jenis, $validJenis)) {
+            return response()->json(['status' => 'error', 'message' => 'Jenis produk tidak valid'], 400);
+        }
+        
+        // Cari produk berdasarkan nama produk yang cocok dengan kata kunci dan jenis kategori
+        $products = Product::where('jenis_product', $jenis)
+                           ->where('nama_product', 'like', "%$keyword%")
+                           ->get();
+        
+        return response()->json(['status' => 'success', 'data' => $products], 200);
+    }
+    
+    
 }

@@ -1,9 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\LoginMobileController;
+use App\Http\Controllers\MakananController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DaftarMakananController;
+use App\Http\Controllers\DaftarMinumanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,7 @@ use App\Http\Controllers\TransactionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingpage');
 });
 
 Route::get('/chart/{id}', 
@@ -27,16 +30,12 @@ Route::get('/landingpage', function () {
     return view('landingpage');
 });
 
-// Route::get('/daftarmakanan', function() {
-//     return view('daftarmakanan');
-// });
+Route::post('/landingpage/validate', [LandingpageController::class, 'validateName'])->name('landingpage.validate');
 
-// Route::get('/daftarminuman', function() {
-//     return view('daftarminuman');
-// });
+Route::get('/daftarmenu', [MakananController::class, 'index'])->name('frontend.daftarmanakan');
 
-Route::get('/daftarmakanan', [MenuController::class, 'makanan'])->name('daftarmakanan');
-Route::get('/daftarminuman', [MenuController::class, 'minuman'])->name('daftarminuman');
-
-
+Route::get('/daftarmenu1', function() {
+    return view('daftarminuman');
+})->name('frontend.daftarminuman');
+ 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
