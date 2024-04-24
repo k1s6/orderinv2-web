@@ -38,4 +38,7 @@ Route::get('/daftarmenu1', function() {
     return view('daftarminuman');
 })->name('frontend.daftarminuman');
  
+Route::get('/daftarmenu2', function() {
+    return view('daftarsnack');
+})->name('frontend.daftarsnack');
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
