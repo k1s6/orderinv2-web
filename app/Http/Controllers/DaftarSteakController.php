@@ -10,6 +10,6 @@ class DaftarSteakController extends Controller
     public function index() {
         $foods = Product::where('jenis_product', 'steak')->get();
 
-        return view('daftarmakanan', compact('foods'));
+        return view('daftarsteak', compact('foods'));
     }
 }

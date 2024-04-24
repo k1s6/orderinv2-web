@@ -124,9 +124,9 @@
                     <!-- Kategori Menu Minuman -->
                     <nav class="menu">
                         <a href="{{ route('frontend.daftarmanakan') }}" class="item food-item text-decoration-none text-dark">Makanan</a>
-                        <a href="#" class="item snack-item text-decoration-none text-dark">Snack</a>
+                        <a href="{{ route('frontend.daftarsnack') }}" class="item snack-item text-decoration-none text-dark">Snack</a>
                         <a href="{{ route('frontend.daftarminuman') }}" class="item drink-item text-decoration-none text-dark">Minuman</a>
-                        <a href="#" class="item steak-item text-decoration-none text-dark">Steak</a>
+                        <a href="{{ route('frontend.daftarsteak') }}" class="item steak-item text-decoration-none text-dark">Steak</a>
                     </nav>
                     
                 </div>
@@ -136,225 +136,59 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                    @foreach($foods as $food)
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="\asset\img\jus-alpukat.jpg" alt="..." />
+                            <img class="card-img-top" src="asset/img/{{$food->gambar_product}}" alt="{{ $food->gambar_product }}" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Jus Alpukat</h5>
+                                    <h5 class="fw-bolder">{{ $food->nama_product }}</h5>
                                     <!-- Product detail-->
-                                    <p class="text-muted">Jus alpukat dengan tambahan susu coklat.</p>
+                                    <p class="text-muted">{{ $food->deskripsi }}</p>
                                 </div>
                             </div>                            
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <section class="container-makanan">
-                                    <div class="price">Rp. 12.000</div>
+                                    <div class="price">{{ $food->harga_product }}</div>
+                                    <button class="image-button">
+                                        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6a1d1063d598f9dd6352816614a3c4a09277f0c6602c62d824cd35c0381dea57?apiKey=360a469a3140447dabe15088e7550a5c&" alt="Product Image" class="image" />
+                                    </button>                                
+                                </section>                                   
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                
+                    {{--                     
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{asset('asset/img/21c5ac87bcf3c2c74e8adfbcfeb6b82d.jpg')}}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Spagheti Bolognese</h5>
+                                    <!-- Product detail-->
+                                    <p class="text-muted">Sajian pasta khas Italia dengan daging sapi cincang.</p>
+                                </div>
+                            </div>                            
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <section class="container-makanan">
+                                    <div class="price">Rp. 10.000</div>
                                     <button class="image-button">
                                         <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6a1d1063d598f9dd6352816614a3c4a09277f0c6602c62d824cd35c0381dea57?apiKey=360a469a3140447dabe15088e7550a5c&" alt="Product Image" class="image" />
                                     </button>                                </section>                            
                             </div>
                         </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="\asset\img\kopicangkir.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Kopi Hitam Cangkir</h5>
-                                    <p class="text-muted">Kopi hitam biasa spek warungan.</p>
-
-                                    <!-- Product price-->
-                                    <section class="container-makanan">
-                                        <div class="price">Rp. 5.000</div>
-                                        <button class="image-button">
-                                            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6a1d1063d598f9dd6352816614a3c4a09277f0c6602c62d824cd35c0381dea57?apiKey=360a469a3140447dabe15088e7550a5c&" alt="Product Image" class="image" />
-                                        </button>
-                                    </section>                            
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="\asset\img\esteh-manis.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Es Teh</h5>
-                                    <p class="text-muted">Es teh manis dan segar.</p>
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <section class="container-makanan">
-                                        <div class="price">Rp. 4.000</div>
-                                        <button class="image-button">
-                                            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6a1d1063d598f9dd6352816614a3c4a09277f0c6602c62d824cd35c0381dea57?apiKey=360a469a3140447dabe15088e7550a5c&" alt="Product Image" class="image" />
-                                        </button>
-                                    </section>                            
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="\assets\img\milky-caramel.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Milky Caramel</h5>
-                                    <p class="text-muted">Milkshake dengan rasa karamel yang manis.</p>
-                                    <!-- Product price-->
-                                    <section class="container-makanan">
-                                        <div class="price">Rp. 11.000</div>
-                                        <button class="image-button">
-                                            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6a1d1063d598f9dd6352816614a3c4a09277f0c6602c62d824cd35c0381dea57?apiKey=360a469a3140447dabe15088e7550a5c&" alt="Product Image" class="image" />
-                                        </button>
-                                    </section>                            
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $120.00 - $280.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> --}}
+                    
                 </div>
             </div>
         </section>

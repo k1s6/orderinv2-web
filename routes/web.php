@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MakananController;
+use App\Http\Controllers\DaftarSnackController;
+use App\Http\Controllers\DaftarSteakController;
 use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\LoginMobileController;
-use App\Http\Controllers\MakananController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\DaftarMakananController;
 use App\Http\Controllers\DaftarMinumanController;
@@ -34,11 +36,10 @@ Route::post('/landingpage/validate', [LandingpageController::class, 'validateNam
 
 Route::get('/daftarmenu', [MakananController::class, 'index'])->name('frontend.daftarmanakan');
 
-Route::get('/daftarmenu1', function() {
-    return view('daftarminuman');
-})->name('frontend.daftarminuman');
+Route::get('/daftarmenu1', [DaftarMinumanController::class, 'index'])->name('frontend.daftarminuman');
  
-Route::get('/daftarmenu2', function() {
-    return view('daftarsnack');
-})->name('frontend.daftarsnack');
+Route::get('/daftarmenu2', [DaftarSnackController::class, 'index'])->name('frontend.daftarsnack');
+
+Route::get('/daftarmenu3', [DaftarSteakController::class, 'index'])->name('frontend.daftarsteak');
+
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);

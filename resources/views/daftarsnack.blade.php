@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Daftar Makanan</title>
+        <title>Daftar Snack</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -50,8 +50,9 @@
             justify-content: space-around;
         }
         .food-item {
-            background-color: #E5AF10;
+            background-color: transparent;
             border-radius: 5px;
+            color: #0d0d0d;
         }
         .drink-item  {          flex-grow: 0;
             color: #0d0d0d;
@@ -61,6 +62,12 @@
             color: #0d0d0d;
             background-color:transparent
         }
+        .snack-item  {          flex-grow: 0;
+            color: #0d0d0d;
+            border-radius: 5px;
+            background-color: #E5AF10;
+        }
+
         .container-makanan {
             display: flex;
             margin-top: 19px;
@@ -108,12 +115,12 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder text-black">Daftar Menu</h1>
+                    <h1 class="display-4 fw-bolder text-black">Daftar Snack</h1>
                     <nav class="menu">
                         <a href="{{ route('frontend.daftarmanakan') }}" class="item food-item text-decoration-none">Makanan</a>
-                        <a href="#" class="item drink-item text-decoration-none">Snack</a>
+                        <a href="{{ route('frontend.daftarsnack') }}" class="item snack-item text-decoration-none">Snack</a>
                         <a href="{{ route('frontend.daftarminuman') }}" class="item drink-item text-decoration-none">Minuman</a>
-                        <a href="#" class="item steak-item text-decoration-none">Steak</a>
+                        <a href="{{ route('frontend.daftarsteak') }}" class="item steak-item text-decoration-none">Steak</a>
                     </nav>
                     
                 </div>
@@ -128,7 +135,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="{{asset('asset/img/21c5ac87bcf3c2c74e8adfbcfeb6b82d.jpg')}}" alt="..." />
+                            <img class="card-img-top" src="asset/img/{{$food->gambar_product}}" alt="{{ $food->gambar_product }}" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
