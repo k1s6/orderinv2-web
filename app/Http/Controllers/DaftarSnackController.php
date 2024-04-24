@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class DaftarMinumanController extends Controller
+class DaftarSnackController extends Controller
 {
     public function index() {
-        $foods = Product::where('jenis_product', 'minuman')->get();
+        $foods = Product::where('jenis_product', 'snack')->get();
 
         return view('daftarmakanan', compact('foods'));
     }
