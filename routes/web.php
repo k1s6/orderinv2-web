@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginMobileController;
 use App\Http\Controllers\MakananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DaftarMakananController;
+use App\Http\Controllers\DaftarMinumanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,7 @@ use App\Http\Controllers\TransactionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingpage');
 });
 
 Route::get('/chart/{id}', 
