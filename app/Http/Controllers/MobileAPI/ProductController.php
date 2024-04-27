@@ -126,8 +126,32 @@ class ProductController extends Controller
         $products = Product::where('jenis_product', $jenis)
                            ->where('nama_product', 'like', "%$keyword%")
                            ->get();
+
+        if ($products->isEmpty()) {
+            return response()->json(['status' => 'kosong', 'message' => 'Tidak ada produk yang ditemukan'], 404);
+        }
         
         return response()->json(['status' => 'success', 'data' => $products], 200);
+    }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            // Validasi gambar jika diperlukan
+            $request->validate([
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Sesuaikan dengan kebutuhan Anda
+            ]);
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('asset/img'), $imageName); // Simpan gambar di folder public/img
+
+            // Return URL gambar yang baru saja diupload
+            return response()->json(['status' => 'success', 'data' => asset('asset/img/' . $imageName), 'name' => $imageName], 200);
+        } else {
+            // Jika tidak ada gambar yang diupload
+            return response()->json(['status' => 'failed', 'message' => 'No image uploaded'], 400);
+        }
     }
     
     
