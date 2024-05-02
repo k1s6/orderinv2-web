@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginMobileController;
 use App\Http\Controllers\MobileAPI\MobileUserController;
 use App\Http\Controllers\MobileAPI\ProductController;
+use App\Http\Controllers\MobileAPI\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::group(['prefix' => '/apimobileorderin'], function(){
     Route::get('/delproduct/{id}', [ProductController::class, 'destroyProduct']);
     Route::get('/findproduct/{jenis}', [ProductController::class, 'searchProduct']);
     Route::post('/upload-img', [ProductController::class, 'uploadImage']);
+    Route::get('/transaction/{status}', [TransactionController::class, 'showPesananIn']);
 });
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);

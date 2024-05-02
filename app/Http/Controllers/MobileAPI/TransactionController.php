@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    public function showPesananIn(Request $request) {
+    public function showPesananIn(Request $request, $status) {
         // show data pesanan
         try {
-            $transactions = Transaksi::with('details.product')->get();;
+            $transactions = Transaksi::with('details.product')->where('status', $status)->get();;
 
 
             if ($transactions) {
