@@ -31,6 +31,7 @@ Route::group(['prefix' => '/apimobileorderin'], function(){
     Route::get('/findproduct/{jenis}', [ProductController::class, 'searchProduct']);
     Route::post('/upload-img', [ProductController::class, 'uploadImage']);
     Route::get('/transaction/{status}', [TransactionController::class, 'showPesananIn']);
+    Route::put('/transactionupdate/{id}', [TransactionController::class, 'updatePesanan']);
 });
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
