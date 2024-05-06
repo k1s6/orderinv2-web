@@ -18,6 +18,7 @@ class Transaksi extends Model
         "status",
         "jumlah",
         "total",
+        "catatan",
         "update"
     ];
 
