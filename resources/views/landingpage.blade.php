@@ -45,8 +45,8 @@
                     <!-- Page heading-->
                     <h1 class="mb-5">ORDERIN</h1>
                     <hr style="border-top: 3px solid black; width: 100%; margin-bottom: 30px;">
-                    <h4 class="mb-5">Happy with delicious food</h4>
-                    <p>and get new experiences with asian food</p>
+                    <h4 class="mb-5">Selamat menikmati makanan lezat</h4>
+                    <p>dan dapatkan pengalaman baru dengan makanan di Cafe kami</p>
                 </div>
 
                 {{-- id="contactForm" data-sb-form-api-token="API_TOKEN" --}}
@@ -54,14 +54,14 @@
                     <!-- Email address input-->
                     <div class="row">
                         <div class="col">
-                            <input class="form-control form-control-lg" id="fullName" name="fullName" type="text" placeholder="Nama Kamu Disini" data-sb-validations="required" required/>
+                            <input class="form-control form-control-lg" id="fullName" name="fullName" type="text" placeholder="Masukkan Nama Kamu Disini" data-sb-validations="required" required/>
                             <div class="invalid-feedback text-white" data-sb-feedback="fullName:required">Full Name is required.</div>
                         </div>
                     </div>
                     <!-- button submit -->
                     <div class="row justify-content-center">
                         <div class="col-auto">
-                            <div class="col-auto"><a href="{{ route('frontend.daftarmanakan') }}"  class="btn btn-primary btn-lg">Submit</a></div>
+                            <div class="col-auto"><a href="{{ route('frontend.daftarmanakan') }}"  onclick="submitNama()" class="btn btn-primary btn-lg">Lanjut</a></div>
                         </div>
                     </div>
                     <div class="d-none" id="submitSuccessMessage">
@@ -120,5 +120,19 @@
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script>
+        // Fungsi untuk mengambil nilai nama dari input
+        function submitNama() {
+            // Ambil nilai dari input
+            var nama = document.getElementById('fullName').value;
     
+            // Simpan nilai nama di local storage
+            localStorage.setItem('nama', nama);
+    
+            // Arahkan pengguna ke halaman cart
+            window.location.href = 'link_halaman_cart_di_sini';
+        }
+    </script>
+;
+
 </body>

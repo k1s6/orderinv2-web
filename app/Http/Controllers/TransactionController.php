@@ -9,9 +9,18 @@ class TransactionController extends Controller
 {
     public function show(String $id) 
     {
-        $cartData = Storage::get('data/cart.json');
-        $cartItems = json_decode($cartData, true);
+        // Cek apakah file 'cart.json' ada
+        if (Storage::exists('data/cart.json')) {
+            // Ambil data dari file 'cart.json'
+            $cartData = Storage::get('data/cart.json');
+            // Dekode data menjadi array
+            $cartItems = json_decode($cartData, true);
+        } else {
+            // Jika file 'cart.json' tidak ditemukan, inisialisasi $cartItems sebagai array kosong
+            $cartItems = [];
+        }
 
-        return view('cart')->with(['cartItems'=> $cartItems, 'idChart' => $id]);
+        // Pass the cart items data and the $id parameter to the view
+        return view('cart', ['cartItems' => $cartItems, 'idChart' => $id]);
     }
 }

@@ -25,12 +25,13 @@ Route::get('/', function () {
     return view('landingpage');
 });
 
-Route::get('/chart/{id}', 
-[TransactionController::class, 'show']);
+// Route::get('/chart/{id}', 
+// [TransactionController::class, 'show']);
 
 Route::get('/landingpage', function () {
     return view('landingpage');
-});
+})->name('landingpage'); // memberi nama rute 'landingpage'
+
 
 Route::post('/landingpage/validate', [LandingpageController::class, 'validateName'])->name('landingpage.validate');
 
@@ -41,5 +42,11 @@ Route::get('/daftarmenu1', [DaftarMinumanController::class, 'index'])->name('fro
 Route::get('/daftarmenu2', [DaftarSnackController::class, 'index'])->name('frontend.daftarsnack');
 
 Route::get('/daftarmenu3', [DaftarSteakController::class, 'index'])->name('frontend.daftarsteak');
+
+Route::get('/cart/{id}', [TransactionController::class, 'show'])->name('cart.index');
+
+Route::get('/berhasil', function () {
+    return view('berhasilmemesan');
+})->name('frontend.berhasil');
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
