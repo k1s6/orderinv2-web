@@ -13,15 +13,10 @@ class DetailTransaksi extends Model
 
     protected $fillable = [
         "kode_transaksi",
-        "kode_product",
+        "nama_product",
         "jumlah",
         "harga",
         "total"
     ];
 
-    // Define the relationship with products
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'kode_product', 'kode_product');
-    }
 }

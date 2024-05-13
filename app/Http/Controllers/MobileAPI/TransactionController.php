@@ -13,7 +13,7 @@ class TransactionController extends Controller
     public function showPesananIn(Request $request, $status) {
         // show data pesanan
         try {
-            $transactions = Transaksi::with('details.product')->where('status', $status)->get();;
+            $transactions = Transaksi::with('details')->where('status', $status)->get();;
 
 
             if ($transactions) {
