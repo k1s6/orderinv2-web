@@ -14,12 +14,16 @@ class ProductController extends Controller
             // Ambil semua data dari model
             $data = Product::where('jenis_product', $jenis)->get();
 
+            foreach ($data as $prod) {
+                $prod->gambar_product = asset('asset/img/' . $prod->gambar_product);
+            }
+
             // Jika data ditemukan, kembalikan respons JSON
             if ($data->count() > 0) {
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Data retrieved successfully',
-                    'data' => $data
+                    'data' => $data, 
                 ], 200);
             } else {
                 // Jika tidak ada data, kembalikan pesan kosong

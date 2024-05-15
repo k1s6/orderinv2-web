@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['diterima', 'ditolak', 'dikonfirmasi'])->nullable(false);
             $table->integer('jumlah')->nullable(false);
             $table->bigInteger('total')->nullable(false);
+            $table->String('catatan')->nullable(true);
             $table->timestamps();
         });
     }

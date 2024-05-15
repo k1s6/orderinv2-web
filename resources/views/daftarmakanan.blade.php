@@ -203,7 +203,7 @@
                                             alt="Product Image" class="image"
                                             /> --}}
                                     </div>
-                                    <input type="text" class="qty-input form-control" maxlength="2" max="10" id="qty_{{ $food->kode_product }}">
+                                    <input type="text" class="qty-input form-control" maxlength="2" max="10" id="qty_{{ $food->kode_product }}" disabled>
                                     <div class="input-group-append increment-btn" style="cursor: pointer">
                                         <button class="image-button" data-id="{{ $food->kode_product }}" data-name="{{ $food->nama_product }}" data-price="{{ $food->harga_product }}">
                                             <img loading="lazy" src="https://s6.imgcdn.dev/dYFU8.png" alt="Product Image" class="image" />
@@ -334,14 +334,16 @@
                 const qtyInput = document.querySelector(`#qty_${productId}`);
 
                 if (qtyInput) {
-                    // Increment the value of the quantity input field
+                    // Decrement the value of the quantity input field only if it's greater than 0
                     let currentValue = parseInt(qtyInput.value) || 0; // Get the current value or default to 0 if NaN
-                    let incrementedValue = currentValue - 1; // Increment the value
-                    qtyInput.value = incrementedValue; // Update the input field with the new value
-
+                    if (currentValue > 0) { // Check if the current value is greater than 0
+                        let decrementedValue = currentValue - 1; // Decrement the value
+                        qtyInput.value = decrementedValue; // Update the input field with the new value
+                    }
                 }
             });
         });
+
 
         // Load cart data from local storage
         const cart2 = JSON.parse(localStorage.getItem('cart')) || [];

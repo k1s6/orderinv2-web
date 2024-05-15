@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    // public $timestamps = false;
 
     protected $table = 'table_product'; // Ganti your_table dengan nama tabel yang sesuai
 
@@ -22,7 +22,8 @@ class Product extends Model
         'harga_product',
         'jenis_product',
         'gambar_product',
-        'update'
+        'created_at',
+        'updated_at',
     ];
 
     // Jika diperlukan, Anda juga dapat menentukan kolom-kolom yang harus disembunyikan dari array JSON
