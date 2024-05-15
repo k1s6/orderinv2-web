@@ -52,26 +52,10 @@
 </nav>
      
 <section class="content-section">
-    @foreach($foods as $food)
     <table class="table mt-2">
         <tbody id="cart-items">
-            <td class="cart-product-quantity" width="120px">
-                <div class="input-group quantity">
-                    <div class="input-group-prepend decrement-btn" style="cursor: pointer">
-                        <button class="image-button-minus" data-id="{{ $food->kode_product }}" data-name="{{ $food->nama_product }}" data-price="{{ $food->harga_product }}">
-                            <img loading="lazy" src="https://s6.imgcdn.dev/dYq6y.png" alt="Product Image" class="image" />
-                        </button>
-                    </div>
-                    <input type="text" class="qty-input form-control" maxlength="2" max="10" id="qty_{{ $food->kode_product }}" disabled>
-                    <div class="input-group-append increment-btn" style="cursor: pointer">
-                        <button class="image-button" data-id="{{ $food->kode_product }}" data-name="{{ $food->nama_product }}" data-price="{{ $food->harga_product }}">
-                            <img loading="lazy" src="https://s6.imgcdn.dev/dYFU8.png" alt="Product Image" class="image" />
-                        </button>
-                    </div>
-                </div>
-            </td>
+            <!-- Product items will be inserted here dynamically -->
         </tbody>
-        @endforeach
     </table>
 
     <hr class="border border-2 border-dark">
@@ -99,102 +83,72 @@
     </div>
 </nav>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 <script>
-    // Fungsi untuk menambahkan produk ke keranjang
-    function addProductToCart(id, name, price) {
-        const product = { id, name, price }; // Membuat objek produk
-        let cart = JSON.parse(localStorage.getItem('cart')) || []; // Mendapatkan keranjang dari local storage atau membuat keranjang baru jika belum ada
-        cart.push(product); // Menambahkan produk ke dalam keranjang
-        localStorage.setItem('cart', JSON.stringify(cart)); // Menyimpan keranjang dalam local storage
-        loadCartFromLocalStorage(); // Memuat kembali isi keranjang
+
+    // Ambil nilai nama dari local storage
+    var nama = localStorage.getItem('nama');
+
+    // Tampilkan nilai nama di elemen yang sesuai
+    document.getElementById('namaDiCart').innerText = nama;
+
+   // Function to load cart items from local storage
+function loadCartFromLocalStorage() {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+        const cartItems = JSON.parse(storedCart);
+        const tbody = document.getElementById('cart-items');
+        let totalPrice = 0;
+        // Create a map to store items with their IDs as keys
+        const itemMap = new Map();
+        cartItems.forEach(item => {
+            if (itemMap.has(item.id)) {
+                // If item with same ID already exists, update quantity and price
+                const existingItem = itemMap.get(item.id);
+                existingItem.quantity += 1; // Increment quantity
+                existingItem.price = parseInt(existingItem.price); // Convert price to integer
+                totalPrice += existingItem.price; // Add price to total price
+            } else {
+                // If item with this ID doesn't exist, add it to the map
+                itemMap.set(item.id, { ...item, quantity: 1 }); // Set quantity to 1
+                totalPrice += parseInt(item.price); // Add price to total price
+            }
+        });
+        // Iterate through the item map to create table rows
+        itemMap.forEach(item => {
+            const productInfo = document.createElement('tr');
+            productInfo.innerHTML = `
+                <td>${item.name}</td>
+                <td class="nw">Rp.${item.price} x ${item.quantity}</td>
+            `;
+            tbody.appendChild(productInfo);
+        });
+        // Display total price
+        document.getElementById('total-price').textContent = `Rp.${totalPrice}`;
+        document.getElementById('total-price-footer').textContent = `Rp.${totalPrice}`;
     }
+}
 
-    // Fungsi untuk mengurangi produk dari keranjang
-    function removeProductFromCart(id) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || []; // Mendapatkan keranjang dari local storage atau membuat keranjang baru jika belum ada
-        const index = cart.findIndex(item => item.id === id); // Temukan indeks produk dalam keranjang
-        if (index !== -1) {
-            cart.splice(index, 1); // Hapus produk dari keranjang
-            localStorage.setItem('cart', JSON.stringify(cart)); // Menyimpan keranjang yang telah diubah dalam local storage
-            loadCartFromLocalStorage(); // Memuat kembali isi keranjang
-        }
-    }
+// Function to confirm order
+function confirmOrder() {
+            const notes = document.getElementById('notes').value;
+            // Ask for confirmation
+            const isConfirmed = confirm("Apakah kamu yakin untuk konfirmasi pesanan?");
+            if (isConfirmed) {
+                // Redirect to the success page
+                window.location.href = "{{ route('frontend.berhasil') }}";
+            } else {
+                alert("Pesanan di batalkan.");
+            }
+        }// Load cart items when the page is loaded
+window.addEventListener('load', loadCartFromLocalStorage);
 
-    // Fungsi untuk memuat isi keranjang dari local storage
-    function loadCartFromLocalStorage() {
-        const storedCart = localStorage.getItem('cart');
-        if (storedCart) {
-            const cartItems = JSON.parse(storedCart);
-            const tbody = document.getElementById('cart-items');
-            let totalPrice = 0;
-            tbody.innerHTML = ''; // Kosongkan isi tabel sebelum memuat ulang
-            cartItems.forEach(item => {
-                const productInfo = document.createElement('tr');
-                productInfo.innerHTML = `
-                    <td>${item.name}</td>
-                    <td class="nw">Rp.${item.price}</td>
-                    <td>
-                        <div class="input-group">
-                            <button class="btn btn-outline-secondary btn-minus" type="button" data-id="${item.id}">-</button>
-                            <input type="text" class="form-control quantity-input" value="1" readonly>
-                            <button class="btn btn-outline-secondary btn-plus" type="button" data-id="${item.id}">+</button>
-                        </div>
-                    </td>
-                    <td class="nw">Rp.${item.price}</td>
-                    <td>
-                        <button class="btn btn-danger btn-remove" data-id="${item.id}">Hapus</button>
-                    </td>
-                `;
-                tbody.appendChild(productInfo);
-                totalPrice += parseInt(item.price);
-            });
-            document.getElementById('total-price').textContent = `Rp.${totalPrice}`;
-            document.getElementById('total-price-footer').textContent = `Rp.${totalPrice}`;
-        }
-    }
-
-    // Event listener untuk tombol tambah produk
-    $(document).on('click', '.btn-plus', function() {
-        const productId = $(this).data('id');
-        const quantityInput = $(this).siblings('.quantity-input');
-        let quantity = parseInt(quantityInput.val()) + 1;
-        quantityInput.val(quantity);
-    });
-
-    // Event listener untuk tombol kurangi produk
-    $(document).on('click', '.btn-minus', function() {
-        const quantityInput = $(this).siblings('.quantity-input');
-        let quantity = parseInt(quantityInput.val());
-        if (quantity > 1) {
-            quantityInput.val(quantity - 1);
-        }
-    });
-
-    // Event listener untuk tombol hapus produk
-    $(document).on('click', '.btn-remove', function() {
-        const productId = $(this).data('id');
-        removeProductFromCart(productId);
-    });
-
-    // Fungsi untuk mengonfirmasi pesanan
-    function confirmOrder() {
-        const notes = document.getElementById('notes').value;
-        const isConfirmed = confirm("Apakah kamu yakin untuk konfirmasi pesanan?");
-        if (isConfirmed) {
-            window.location.href = "{{ route('frontend.berhasil') }}";
-        } else {
-            alert("Pesanan di batalkan.");
-        }
-    }
-
-    // Memuat isi keranjang dari local storage saat halaman dimuat
-    $(document).ready(function() {
-        loadCartFromLocalStorage();
-    });
 </script>
-
 </body>
 </html>
+
+
