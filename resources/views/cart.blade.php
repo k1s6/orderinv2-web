@@ -91,7 +91,7 @@
 <script>
 
     // Ambil nilai nama dari local storage
-    var nama = localStorage.getItem('nama');
+    var nama = localStorage.getItem('customerName');
 
     // Tampilkan nilai nama di elemen yang sesuai
     document.getElementById('namaDiCart').innerText = nama;
@@ -99,39 +99,71 @@
    // Function to load cart items from local storage
 function loadCartFromLocalStorage() {
     const storedCart = localStorage.getItem('cart');
-    if (storedCart) {
-        const cartItems = JSON.parse(storedCart);
-        const tbody = document.getElementById('cart-items');
-        let totalPrice = 0;
-        // Create a map to store items with their IDs as keys
-        const itemMap = new Map();
-        cartItems.forEach(item => {
-            if (itemMap.has(item.id)) {
-                // If item with same ID already exists, update quantity and price
-                const existingItem = itemMap.get(item.id);
-                existingItem.quantity += 1; // Increment quantity
-                existingItem.price = parseInt(existingItem.price); // Convert price to integer
-                totalPrice += existingItem.price; // Add price to total price
-            } else {
-                // If item with this ID doesn't exist, add it to the map
-                itemMap.set(item.id, { ...item, quantity: 1 }); // Set quantity to 1
-                totalPrice += parseInt(item.price); // Add price to total price
-            }
-        });
-        // Iterate through the item map to create table rows
+if (storedCart) {
+    const cartItems = JSON.parse(storedCart);
+    const tbody = document.getElementById('cart-items');
+    let totalPrice = 0;
+    const itemMap = new Map();
+
+    cartItems.forEach(item => {
+        if (itemMap.has(item.id)) {
+            const existingItem = itemMap.get(item.id);
+            existingItem.quantity += 1;
+            existingItem.price = parseInt(existingItem.price);
+            totalPrice += existingItem.price;
+        } else {
+            itemMap.set(item.id, { ...item, quantity: 1 });
+            totalPrice += parseInt(item.price);
+        }
+    });
+
+    const renderTable = () => {
+        tbody.innerHTML = ''; // Clear the existing table rows
+        totalPrice = 0; // Reset total price
+
         itemMap.forEach(item => {
             const productInfo = document.createElement('tr');
             productInfo.innerHTML = `
                 <td>${item.name}</td>
-                <td class="nw">Rp.${item.price} x ${item.quantity}</td>
+                <td class="nw">Rp.${item.price} x ${item.quantity} <button class="edit-pencil" data-id="${item.id}">✏️</button></td>
             `;
             tbody.appendChild(productInfo);
+            totalPrice += item.price * item.quantity; // Update total price
         });
-        // Display total price
+
         document.getElementById('total-price').textContent = `Rp.${totalPrice}`;
         document.getElementById('total-price-footer').textContent = `Rp.${totalPrice}`;
-    }
+    };
+
+    const updateLocalStorage = () => {
+        const updatedCartItems = [];
+        itemMap.forEach((item, id) => {
+            for (let i = 0; i < item.quantity; i++) {
+                updatedCartItems.push({ id: item.id, name: item.name, price: item.price });
+            }
+        });
+        localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+    };
+
+    renderTable(); // Initial render
+
+    tbody.addEventListener('click', function(event) {
+        if (event.target.classList.contains('edit-pencil')) {
+            const itemId = event.target.getAttribute('data-id');
+            const item = itemMap.get(itemId);
+            const newQuantity = prompt('Masukkan jumlah baru:', item.quantity);
+            if (newQuantity !== null && !isNaN(newQuantity) && newQuantity > 0) {
+                item.quantity = parseInt(newQuantity); // Update item quantity
+                updateLocalStorage(); // Update localStorage
+                renderTable(); // Re-render table with updated quantity
+            }
+        }
+    });
 }
+
+
+}
+
 
 // Function to confirm order
 function confirmOrder() {
