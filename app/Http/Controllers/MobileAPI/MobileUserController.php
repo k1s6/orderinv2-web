@@ -4,7 +4,9 @@ namespace App\Http\Controllers\MobileAPI;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use PHPUnit\Logging\Exception;
 use App\Http\Controllers\Controller;
+use Database\Seeders\UserdumpSeeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -90,6 +92,17 @@ class MobileUserController extends Controller
             return response()->json(['status' => 'success'], 200);
         } else {
             return response()->json(['status' => 'error'], 400);
+        }
+    }
+
+    public function addUserData()
+    {
+        try {
+            $seeder = new UserdumpSeeder();
+            $seeder->run();
+            echo "User data seeding successful!";
+        } catch (Exception $e) {
+            echo "User data seeding failed: " . $e->getMessage();
         }
     }
 }

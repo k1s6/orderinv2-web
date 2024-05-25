@@ -11,12 +11,14 @@ class DetailTransaksi extends Model
 
     protected $table = 'detail_transaksi';
 
+    public $timestamps = false;
+
     protected $fillable = [
         "kode_transaksi",
         "nama_product",
         "jumlah",
         "harga",
-        "total"
+        "total",
     ];
 
 }

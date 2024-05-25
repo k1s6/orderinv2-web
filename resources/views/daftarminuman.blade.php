@@ -192,14 +192,14 @@
                                 <div class="input-group quantity">
                                     <div class="input-group-prepend decrement-btn" style="cursor: pointer">
                                         <button class="image-button-minus" data-id="{{ $food->kode_product }}" data-name="{{ $food->nama_product }}" data-price="{{ $food->harga_product }}">
-                                            <img loading="lazy" src="https://s6.imgcdn.dev/dYq6y.png" alt="Product Image" class="image" />
+                                            <img loading="lazy" src="{{asset('asset/img/minusbutton.png')}}" alt="Product Image" class="image" />
                                         </button>
 
                                     </div>
                                     <input type="text" class="qty-input form-control" maxlength="2" max="10" id="qty_{{ $food->kode_product }}" disabled>
                                     <div class="input-group-append increment-btn" style="cursor: pointer">
                                         <button class="image-button" data-id="{{ $food->kode_product }}" data-name="{{ $food->nama_product }}" data-price="{{ $food->harga_product }}">
-                                            <img loading="lazy" src="https://s6.imgcdn.dev/dYFU8.png" alt="Product Image" class="image" />
+                                            <img loading="lazy" src="{{asset('asset/img/plusbutton.png')}}" alt="Product Image" class="image" />
                                         </button>
                                         {{-- <span class="input-group-text">+</span> --}}
                                             {{-- <img loading="lazy"

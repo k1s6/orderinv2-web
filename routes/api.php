@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginMobileController;
 use App\Http\Controllers\MobileAPI\MobileUserController;
 use App\Http\Controllers\MobileAPI\ProductController;
@@ -32,6 +33,8 @@ Route::group(['prefix' => '/apimobileorderin'], function(){
     Route::post('/upload-img', [ProductController::class, 'uploadImage']);
     Route::get('/transaction/{status}', [TransactionController::class, 'showPesananIn']);
     Route::put('/transactionupdate/{id}', [TransactionController::class, 'updatePesanan']);
+    Route::get('/user/userdump', [MobileUserController::class, 'addUserData']);
+    // Route::post('/cart/post', [CartController::class, 'store'])->name('cart.transactioninsert');
 });
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);

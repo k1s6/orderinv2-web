@@ -49,4 +49,6 @@ Route::get('/berhasil', function () {
     return view('berhasilmemesan');
 })->name('frontend.berhasil');
 
+Route::post('/cart/post', [TransactionController::class, 'store'])->name('transaksi.store');
+
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);

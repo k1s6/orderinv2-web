@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use App\Models\DetailTransaksi;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TransactionController extends Controller
@@ -22,5 +25,40 @@ class TransactionController extends Controller
 
         // Pass the cart items data and the $id parameter to the view
         return view('cart', ['cartItems' => $cartItems, 'idChart' => $id]);
+    }
+
+    public function store(Request $request) 
+    {
+        DB::beginTransaction();
+
+        try {
+            // Create Transaksi
+            $transaksi = Transaksi::create([
+                'nama' => $request->input('nama'),
+                'status' => $request->input('status'),
+                'jumlah' => $request->input('jumlah'),
+                'total' => $request->input('total'),
+                'catatan' => $request->input('catatan')
+            ]);
+
+            // Create DetailTransaksi
+            $detailTransaksiData = $request->input('detail_transaksi');
+            foreach ($detailTransaksiData as $detail) {
+                DetailTransaksi::create([
+                    'kode_transaksi' => $transaksi->kode_transaksi,
+                    'nama_product' => $detail['nama_product'],
+                    'jumlah' => $detail['jumlah'],
+                    'harga' => $detail['harga'],
+                    'total' => $detail['total']
+                ]);
+            }
+
+            DB::commit();
+
+            return response()->json(['message' => 'Transaction successfully created'], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Transaction creation failed', 'error' => $e->getMessage()], 500);
+        }
     }
 }

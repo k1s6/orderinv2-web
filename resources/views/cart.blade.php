@@ -5,10 +5,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         nav h5 {
             white-space: nowrap;
@@ -167,16 +169,70 @@ if (storedCart) {
 
 // Function to confirm order
 function confirmOrder() {
-            const notes = document.getElementById('notes').value;
-            // Ask for confirmation
-            const isConfirmed = confirm("Apakah kamu yakin untuk konfirmasi pesanan?");
-            if (isConfirmed) {
-                // Redirect to the success page
-                window.location.href = "{{ route('frontend.berhasil') }}";
-            } else {
-                alert("Pesanan di batalkan.");
-            }
-        }// Load cart items when the page is loaded
+        // Fetch customer name and cart data from local storage
+        const customerName = localStorage.getItem('customerName');
+        const cart = JSON.parse(localStorage.getItem('cart'));
+
+        if (!customerName || !cart || cart.length === 0) {
+            alert('Customer name or cart data is missing.');
+            return;
+        }
+
+        // Ask for confirmation
+        const isConfirmed = confirm("Apakah kamu yakin untuk konfirmasi pesanan?");
+        if (isConfirmed) {
+            // Prepare transaction data
+            let totalAmount = 0;
+            const productMap = {};
+
+            cart.forEach(item => {
+                if (productMap[item.id]) {
+                    productMap[item.id].jumlah += 1;
+                    productMap[item.id].total += parseInt(item.price, 10);
+                } else {
+                    productMap[item.id] = {
+                        nama_product: item.name,
+                        jumlah: 1,
+                        harga: parseInt(item.price, 10),
+                        total: parseInt(item.price, 10)
+                    };
+                }
+            });
+
+            const detailTransaksi = Object.values(productMap);
+            totalAmount = detailTransaksi.reduce((sum, item) => sum + item.total, 0);
+
+            const transactionData = {
+                nama: customerName,
+                status: 'diterima',
+                jumlah: detailTransaksi.length,
+                total: totalAmount,
+                catatan: document.getElementById('notes') ? document.getElementById('notes').value : '',
+                detail_transaksi: detailTransaksi
+            };
+
+            // Send POST request
+            $.ajax({
+                url: '{{ route("transaksi.store") }}',
+                method: 'POST',
+                data: JSON.stringify(transactionData),
+                contentType: 'application/json',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    alert('Transaction successfully created');
+                    window.location.href = "{{ route('frontend.berhasil') }}";
+                },
+                error: function(xhr, status, error) {
+                    alert('Transaction creation failed: ' + xhr.responseJSON.message);
+                }
+            });
+        } else {
+            alert("Pesanan di batalkan.");
+        }
+    }
+// Load cart items when the page is loaded
 window.addEventListener('load', loadCartFromLocalStorage);
 
 </script>
