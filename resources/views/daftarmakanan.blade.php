@@ -158,6 +158,7 @@
                     <a href="{{ route('frontend.daftarminuman') }}" class="item drink-item text-decoration-none">Minuman</a>
                     <a href="{{ route('frontend.daftarsteak') }}" class="item steak-item text-decoration-none">Steak</a>
                 </nav>
+                <input type="text" id="searchInput" placeholder="Cari makanan berdasarkan nama atau harga..." class="form-control mt-4">
             </div>
         </div>
     </header>
@@ -187,34 +188,26 @@
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <section class="container-makanan">
                                 <div class="price">Rp. {{ $food->harga_product }}</div>
-                                {{-- <button class="image-button" data-id="{{ $food->kode_product }}" data-name="{{ $food->nama_product }}" data-price="{{ $food->harga_product }}">
-                                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6a1d1063d598f9dd6352816614a3c4a09277f0c6602c62d824cd35c0381dea57?apiKey=360a469a3140447dabe15088e7550a5c&" alt="Product Image" class="image" />
-                                </button> --}}
+                                @if($food->stock_product == 'habis')
+                                <div class="out-of-stock text-danger bg-light p-2 rounded">Stok Habis</div>
+                                @endif
                             </section>
                             <td class="cart-product-quantity" width="120px">
+                                @if($food->stock_product == 'tersedia')
                                 <div class="input-group quantity">
                                     <div class="input-group-prepend decrement-btn" style="cursor: pointer">
                                         <button class="image-button-minus" data-id="{{ $food->kode_product }}" data-name="{{ $food->nama_product }}" data-price="{{ $food->harga_product }}">
                                             <img loading="lazy" src="{{asset('asset/img/minusbutton.png')}}" alt="Product Image" class="image" />
                                         </button>
-                                        {{-- <span class="input-group-text">-</span> --}}
-                                        {{-- <img loading="lazy"
-                                            src="{{asset('asset/icon/icon-minus.png')}}"
-                                            alt="Product Image" class="image"
-                                            /> --}}
                                     </div>
                                     <input type="text" class="qty-input form-control" maxlength="2" max="10" id="qty_{{ $food->kode_product }}" disabled>
                                     <div class="input-group-append increment-btn" style="cursor: pointer">
                                         <button class="image-button" data-id="{{ $food->kode_product }}" data-name="{{ $food->nama_product }}" data-price="{{ $food->harga_product }}">
                                             <img loading="lazy" src="{{asset('asset/img/plusbutton.png')}}" alt="Product Image" class="image" />
                                         </button>
-                                        {{-- <span class="input-group-text">+</span> --}}
-                                            {{-- <img loading="lazy"
-                                            src="{{asset('asset/icon/icon-plus.png')}}"
-                                            alt="Product Image" class="image"
-                                            widht="2" heigt="2" /> --}}
                                     </div>
                                 </div>
+                                @endif
                             </td>
                         </div>
                     </div>
@@ -362,6 +355,27 @@
                 input.value = productCounts[productId] || 0;
             });
         });
+
+        // Fungsi untuk memfilter produk berdasarkan input pencarian
+        function filterProducts() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const productCards = document.querySelectorAll('.col.mb-5');
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('.fw-bolder').textContent.toLowerCase();
+                const productPrice = card.querySelector('.price').textContent.toLowerCase();
+
+                if (productName.includes(searchInput) || productPrice.includes(searchInput)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listener untuk input pencarian
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', filterProducts);
 
         // function showDataValueEachProd(){
 
