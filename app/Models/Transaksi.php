@@ -19,7 +19,8 @@ class Transaksi extends Model
         "jumlah",
         "total",
         "catatan",
-        "update"
+        "created_at",
+        "updated_at"
     ];
 
     // Define the relationship with details

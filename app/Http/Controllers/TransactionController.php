@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\DetailTransaksi;
@@ -32,13 +33,17 @@ class TransactionController extends Controller
         DB::beginTransaction();
 
         try {
+            $currentTimeUTC = Carbon::now('Asia/Jakarta');
+
             // Create Transaksi
             $transaksi = Transaksi::create([
                 'nama' => $request->input('nama'),
                 'status' => $request->input('status'),
                 'jumlah' => $request->input('jumlah'),
                 'total' => $request->input('total'),
-                'catatan' => $request->input('catatan')
+                'catatan' => $request->input('catatan'),
+                'created_at' => $currentTimeUTC,
+                'updated_at' => $currentTimeUTC
             ]);
 
             // Create DetailTransaksi
