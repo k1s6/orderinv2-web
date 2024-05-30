@@ -134,6 +134,10 @@ class ProductController extends Controller
         if ($products->isEmpty()) {
             return response()->json(['status' => 'kosong', 'message' => 'Tidak ada produk yang ditemukan'], 404);
         }
+
+        foreach ($products as $prod) {
+            $prod->gambar_product = asset('asset/img/' . $prod->gambar_product);
+        }
         
         return response()->json(['status' => 'success', 'data' => $products], 200);
     }
