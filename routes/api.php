@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginMobileController;
 use App\Http\Controllers\MobileAPI\MobileUserController;
 use App\Http\Controllers\MobileAPI\ProductController;
@@ -23,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => '/apimobileorderin'], function(){
+Route::group(['prefix' => '/apimobileorderin'], function () {
     Route::post('/login', [MobileUserController::class, 'signinEmail']);
     Route::get('/dataproduct/{jenis}', [ProductController::class, 'getDataProduct']);
     Route::post('/uploadproduct/store', [ProductController::class, 'storeProduct']);
@@ -38,3 +39,5 @@ Route::group(['prefix' => '/apimobileorderin'], function(){
 });
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
+Route::get('/getProduct', [Controller::class, 'getProduct']);
+Route::post('/cart/post', [TransactionController::class, 'store']);

@@ -38,7 +38,7 @@ Route::post('/landingpage/validate', [LandingpageController::class, 'validateNam
 Route::get('/daftarmenu', [MakananController::class, 'index'])->name('frontend.daftarmanakan');
 
 Route::get('/daftarmenu1', [DaftarMinumanController::class, 'index'])->name('frontend.daftarminuman');
- 
+
 Route::get('/daftarmenu2', [DaftarSnackController::class, 'index'])->name('frontend.daftarsnack');
 
 Route::get('/daftarmenu3', [DaftarSteakController::class, 'index'])->name('frontend.daftarsteak');
@@ -49,6 +49,6 @@ Route::get('/berhasil', function () {
     return view('berhasilmemesan');
 })->name('frontend.berhasil');
 
-Route::post('/cart/post', [TransactionController::class, 'store'])->name('transaksi.store');
+// Route::post('/cart/post', [TransactionController::class, 'store'])->name('transaksi.store');
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);

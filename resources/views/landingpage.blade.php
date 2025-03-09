@@ -7,11 +7,11 @@
 <body style="background-image: url('asset/img/bggambar.jpg'); background-size: cover;">
 
     <div class="container d-flex align-items-center justify-content-center vh-100">
-        <div class="card bg-white bg-opacity-75 p-4" style="backdrop-filter: blur(5px);">
-            <div class="card-body text-center px-4">
-                <h1 class="mb-5 mt-3">ORDERIN</h1>
-                <h4 class="mb-4">Selamat menikmati makanan lezat</h4>
-                <p>dan dapatkan pengalaman baru dengan makanan di Cafe kami</p>
+        <div class="card bg-white bg-opacity-75 px-4 pb-4" style="backdrop-filter: blur(5px);">
+            <div class="card-body text-center px-md-4">
+                <p class="fs-1 fw-bolder mb-3 ">ORDERIN</p>
+                <p class="fs-4 fw-bold mb-0 text-break">Selamat menikmati makanan lezat</p>
+                <p class="mb-2">dan dapatkan pengalaman baru dengan makanan di Cafe kami</p>
 
                 <form id="subscribeForm" class="form-subscribe">
                     <!-- Nama input-->
@@ -34,7 +34,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <script>
         function validateName() {
             var nameInput = document.getElementById('fullName').value;

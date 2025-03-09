@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class DaftarSnackController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $foods = Product::where('jenis_product', 'snack')->get();
 
         return view('daftarsnack', compact('foods'));

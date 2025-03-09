@@ -1,46 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Keranjang Kuning</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('app')
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <style>
-        nav h5 {
-            white-space: nowrap;
-            margin-right: 2rem;
-        }
-        .content-section {
-            padding-inline: 1rem;
-        }
-        .product-info {
-            display: flex;
-            align-items: center;
-        }
-        .bg-black {
-            background-color: #2F2F2F !important;
-        }
-        .table .nw {
-            white-space: nowrap;
-            text-align: end;
-        }
-        .table tr:last-child td {
-            border-bottom: none;
-        }
-        /* hr {
-            border: none;
-            background-color: red;
-        } */
-    </style>
-</head>
-<body>
-
+@section('title','keranjang')
+@section('body')
+    
 <nav class="navbar navbar-dark bg-black">
     <div class="container-fluid d-flex-sm justify-content-start">
         <button class="btn btn-link"  style="color: aliceblue; border: none; text-decoration: none;" onclick="window.history.back()">
@@ -54,7 +16,7 @@
 </nav>
      
 <section class="content-section">
-    <table class="table mt-2">
+    <table class="table mt-2 mb-0">
         <tbody id="cart-items">
             <!-- Product items will be inserted here dynamically -->
         </tbody>
@@ -75,7 +37,7 @@
 
     <h5>Catatan (opsional)</h5>
 
-    <textarea class="mt-2" name="test" id="notes" cols="40" rows="10" placeholder="Beri tahu detail catatan anda"></textarea>
+    <textarea class="mt-2 form-control border-3" name="test" id="notes" cols="40" rows="10" placeholder="Beri tahu detail catatan anda"></textarea>
 </section>
 
 <nav class="navbar fixed-bottom navbar-dark bg-dark">
@@ -165,22 +127,33 @@ if (storedCart) {
 
 
 }
-
-
 // Function to confirm order
 function confirmOrder() {
-        // Fetch customer name and cart data from local storage
-        const customerName = localStorage.getItem('customerName');
-        const cart = JSON.parse(localStorage.getItem('cart'));
+    // Fetch customer name and cart data from local storage
+    const customerName = localStorage.getItem('customerName');
+    const cart = JSON.parse(localStorage.getItem('cart'));
 
-        if (!customerName || !cart || cart.length === 0) {
-            alert('Customer name or cart data is missing.');
-            return;
-        }
+    if (!customerName || !cart || cart.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Customer name or cart data is missing.',
+        });
+        return;
+    }
 
-        // Ask for confirmation
-        const isConfirmed = confirm("Apakah kamu yakin untuk konfirmasi pesanan?");
-        if (isConfirmed) {
+    // Ask for confirmation using SweetAlert2
+    Swal.fire({
+        title: 'Konfirmasi Pesanan',
+        text: "Apakah kamu yakin untuk konfirmasi pesanan?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, konfirmasi!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
             // Prepare transaction data
             let totalAmount = 0;
             const productMap = {};
@@ -213,7 +186,7 @@ function confirmOrder() {
 
             // Send POST request
             $.ajax({
-                url: '{{ route("transaksi.store") }}',
+                url: 'api/cart/post',
                 method: 'POST',
                 data: JSON.stringify(transactionData),
                 contentType: 'application/json',
@@ -221,22 +194,36 @@ function confirmOrder() {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    alert('Transaction successfully created');
-                    window.location.href = "{{ route('frontend.berhasil') }}";
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Transaction successfully created.',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        window.location.href = "{{ route('frontend.berhasil') }}";
+                    });
                 },
                 error: function(xhr, status, error) {
-                    alert('Transaction creation failed: ' + xhr.responseJSON.message);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Transaction creation failed: ' + xhr.responseJSON.message,
+                    });
                 }
             });
         } else {
-            alert("Pesanan di batalkan.");
+            Swal.fire({
+                icon: 'info',
+                title: 'Pesanan dibatalkan',
+                text: 'Pesanan tidak jadi dikonfirmasi.',
+            });
         }
-    }
+    });
+}
+
 // Load cart items when the page is loaded
 window.addEventListener('load', loadCartFromLocalStorage);
 
 </script>
-</body>
-</html>
 
-
+@endsection
