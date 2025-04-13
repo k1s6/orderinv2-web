@@ -37,7 +37,7 @@
                     <div class="col mb-5" data-category="{{ $food->jenis_product }}" id="foodItem">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="asset/img/{{ $food->gambar_product }}" alt="Foto Makanan" />
+                            <img class="card-img-top px-3 pt-2" src="asset/img/{{ $food->gambar_product }}" alt="Foto Makanan" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
