@@ -9,7 +9,7 @@ class DetailTransaksi extends Model
 {
     use HasFactory;
 
-    protected $table = 'detail_transaksi';
+    protected $table = 'detail_transaksi'; // Ensure the table name matches your database
 
     public $timestamps = false;
 
@@ -19,6 +19,12 @@ class DetailTransaksi extends Model
         "jumlah",
         "harga",
         "total",
+        "kode_product",
+        "catatan"
     ];
 
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'kode_product', 'kode_product');
+    }
 }

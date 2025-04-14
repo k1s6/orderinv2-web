@@ -9,11 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
-    // public $timestamps = false;
+    protected $table = 'table_product'; // Ensure the table name matches your database
 
-    protected $table = 'table_product'; // Ganti your_table dengan nama tabel yang sesuai
-
-    // Jika diperlukan, Anda dapat menentukan kolom-kolom yang dapat diisi secara massal
     protected $primaryKey = 'kode_product';
     protected $fillable = [
         'nama_product',
@@ -26,8 +23,12 @@ class Product extends Model
         'updated_at',
     ];
 
-    // Jika diperlukan, Anda juga dapat menentukan kolom-kolom yang harus disembunyikan dari array JSON
     protected $hidden = [
         // Masukkan nama kolom yang harus disembunyikan di sini
     ];
+
+    public function detailTransaksis()
+    {
+        return $this->hasMany(DetailTransaksi::class, 'kode_product', 'kode_product');
+    }
 }

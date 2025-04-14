@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginMobileController;
 use App\Http\Controllers\MobileAPI\MobileUserController;
 use App\Http\Controllers\MobileAPI\ProductController;
 use App\Http\Controllers\MobileAPI\TransactionController;
+use App\Http\Controllers\TransactionController as TransactionControllerWeb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,4 +41,4 @@ Route::group(['prefix' => '/apimobileorderin'], function () {
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
 Route::get('/getProduct', [Controller::class, 'getProduct']);
-Route::post('/cart/post', [TransactionController::class, 'store']);
+Route::post('/cart/post', [TransactionControllerWeb::class, 'store']);
