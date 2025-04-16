@@ -1,24 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Event listener untuk tab
-    document.querySelectorAll('.item').forEach(item => {
-        item.addEventListener('click', function(event) {
-            event.preventDefault();
-            
-            // Hapus kelas 'bg-warning' dan 'text-white' dari semua item
-            document.querySelectorAll('.item').forEach(i => {
-                i.classList.remove('bg-warning','px-4','bg-opacity-75', 'shadow');
-            });
+    // Event listener untuk dropdown select
+    const categorySelect = document.getElementById('categorySelect');
+    categorySelect.addEventListener('change', function() {
+        const selectedCategory = categorySelect.value;
 
-            // Tambahkan kelas 'bg-warning' dan 'text-white' pada item yang diklik
-            this.classList.add('bg-warning','px-4','bg-opacity-75', 'shadow', 'fade-in');
+        updateCategoryTitle(selectedCategory);
 
-            // Ubah teks judul berdasarkan kategori yang dipilih
-            const category = this.getAttribute('data-category');
-            updateCategoryTitle(category);
-
-            // Filter makanan berdasarkan kategori
-            filterFoods(category);
-        });
+        // Filter makanan berdasarkan kategori
+        filterFoods(selectedCategory);
     });
 
     // Fungsi untuk memperbarui judul kategori
@@ -55,4 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+            img.src = img.getAttribute('src');
+        });
+    });
 });

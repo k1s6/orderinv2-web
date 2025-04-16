@@ -1,28 +1,21 @@
-@extends('app')
+@extends('layouts.app')
 @section('title', 'berhasil memesan')
 
 @section('body')
-    
-    <header class="bg-dark1 py-5" style="background-color: white;">
-        <div class="container px-4 px-lg-5 my-5">
+
+
+    <body style="background-image: url('asset/img/bggambar.jpg'); background-size: cover;">
+
+        <div class="container d-flex align-items-center justify-content-center vh-100">
+            <div class="card bg-white bg-opacity-75 px-5  rounded-4" style="backdrop-filter: blur(5px);">
+                <div class="body-card text-center px-4  py-3 text-capitalize">
+                    <img src="{{asset('asset/img/orderin.png')}}" alt="Oedrin logo" loading="lazy" width="200px" class="mb-3">
+                    <br>
+                    <img src="{{asset('asset/img/Checkmark.png')}}" alt="Checkmark" loading="lazy" width="100px" class="mb-3">
+                    <h5>berhasil</h5>
+                    <p class="mb-0">Pesanan sedang diproses</p>
+                    <p>silahkan tunggu</p>
+                </div>
+            </div>
         </div>
-    </header>
-    <h1>
-    <div class="d-flex justify-content-center">
-
-        <img src="{{ asset('asset/img/order-delivery 1.jpg') }}" alt="Gambar">
-    </div>
-    <div class="d-flex justify-content-center">
-
-        <img src="{{ asset('asset/img/Group 3.jpg') }}" alt="Gambar">
-        {{-- <img src="{{ asset('asset/img/order-delivery 1.jpg') }}" alt="Gambar"> --}}
-    </div>
-</h1>
-{{-- <script>
-    setTimeout(function() {
-        window.location.href = "{{ route('landingpage') }}"; // Ganti 'homepage' dengan nama rute yang sesuai
-        localStorage.clear(); // Menghapus semua data dari penyimpanan lokal
-    }, 5000); // 5 detik (dalam milidetik)
-</script> --}}
-
-@endsection
+    @endsection

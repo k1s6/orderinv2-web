@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 use App\Models\DetailTransaksi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
-    public function show(String $id) 
+    public function show(String $id)
     {
         // Cek apakah file 'cart.json' ada
         if (Storage::exists('data/cart.json')) {
@@ -28,8 +29,9 @@ class TransactionController extends Controller
         return view('cart', ['cartItems' => $cartItems, 'idChart' => $id]);
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
 
         try {
@@ -54,7 +56,9 @@ class TransactionController extends Controller
                     'nama_product' => $detail['nama_product'],
                     'jumlah' => $detail['jumlah'],
                     'harga' => $detail['harga'],
-                    'total' => $detail['total']
+                    'total' => $detail['total'],
+                    'kode_product' => $detail['kode_product'],
+                    'catatan' => $detail['catatan'] ?? NULL,
                 ]);
             }
 
@@ -63,6 +67,8 @@ class TransactionController extends Controller
             return response()->json(['message' => 'Transaction successfully created'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
+            // Log the error message for debugging
+            Log::error('Transaction creation failed: ' . $e->getMessage());
             return response()->json(['message' => 'Transaction creation failed', 'error' => $e->getMessage()], 500);
         }
     }

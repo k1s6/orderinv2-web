@@ -23,6 +23,10 @@ function initializeCart() {
 // Fungsi untuk memperbarui tampilan jumlah produk dalam keranjang
 function updateCartCount(count) {
     const cartCountElement = document.querySelector('.cart-count');
+    if (!cartCountElement) {
+        console.warn("Element with class 'cart-count' not found in the DOM.");
+        return; // Exit the function if the element is not found
+    }
     cartCountElement.textContent = count;
     if (count > 0) {
         cartCountElement.classList.remove('visually-hidden');
@@ -51,11 +55,16 @@ function popProductFromCart(id) {
     }
 }
 
-// Event listener untuk mengarahkan pengguna ke halaman keranjang
-document.getElementById('redirectButton').addEventListener('click', function() {
-    const url = this.getAttribute('data-url');
-    window.location.href = url;
-});
+// Event listener for redirectButton
+const redirectButton = document.getElementById('redirectButton');
+if (redirectButton) {
+    redirectButton.addEventListener('click', function() {
+        const url = this.getAttribute('data-url');
+        window.location.href = url;
+    });
+} else {
+    console.warn("Element with ID 'redirectButton' not found in the DOM.");
+}
 
 // Event listener untuk memanggil fungsi initializeCart saat halaman dimuat
 window.addEventListener('load', function() {
@@ -135,3 +144,7 @@ window.addEventListener('load', function() {
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', filterProducts);
 });
+
+// Attach functions to the global window object to ensure accessibility
+window.loadCartFromLocalStorage = loadCartFromLocalStorage;
+window.setupQuantityControls = setupQuantityControls;

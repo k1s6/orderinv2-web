@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#000000" />
     <title>
         @yield('title')
@@ -138,12 +138,12 @@
         }
 
         /* Shopping Cart Button CSS */
-        .shopping-cart-btn {
+        /* .shopping-cart-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background-color: #000000;
-            /* Ubah warna latar belakang menjadi hitam */
+            Ubah warna latar belakang menjadi hitam *
             color: white;
             border: none;
             border-radius: 80%;
@@ -155,22 +155,43 @@
             font-size: 30px;
             cursor: pointer;
             z-index: 999;
+            /* Pastikan tombol shopping cart muncul di atas konten lain
+        } */
+
+
+        .shopping-cart-btn {
+            /* position: fixed;
+            bottom: 20px;
+            right: 20px; */
+            background-color: #000000;
+            /* Ubah warna latar belakang menjadi hitam */
+            color: white;
+            border: none;
+            border-radius: 80%;
+            width: 50px;
+            height: 50px;
+            /* display: flex;
+            align-items: center;
+            justify-content: center; */
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 999;
             /* Pastikan tombol shopping cart muncul di atas konten lain */
         }
 
         .cart-count {
             position: absolute;
-            top: -8px;
-            right: -8px;
+            top: 8px;
+            right: 8px;
             background-color: #ffc107;
             color: white;
             width: 30px;
             height: 30px;
             border-radius: 50%;
             font-size: 20px;
-            display: flex;
+            /* display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; */
         }
 
         nav h5 {
@@ -215,10 +236,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Font awesome JS -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <!-- Font inter -->
-    <script src="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom JS -->
     {{-- <script src="{{ asset('asset/js/script.js') }}"></script> --}}
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <script src="{{ asset('asset/js/app.js') }}"></script>
 </body>

@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('detail_transaksi', function (Blueprint $table) {
             // Schema::create('detail_transaksi', function (Blueprint $table) {
-                $table->unsignedBigInteger('kode_transaksi');
-                $table->foreign('kode_transaksi')->references('kode_transaksi')->on('transaksi');
-                $table->String('nama_product',100)->nullable(false);
-                $table->integer('jumlah');
-                $table->bigInteger('harga');
-                $table->bigInteger('total');
+            $table->id();
+            $table->unsignedBigInteger('kode_transaksi');
+            $table->foreign('kode_transaksi')->references('kode_transaksi')->on('transaksi');
+            $table->String('nama_product', 100)->nullable(false);
+            $table->integer('jumlah');
+            $table->bigInteger('harga');
+            $table->bigInteger('total');
             // });
         });
     }
