@@ -13,8 +13,8 @@
                     <br>
                     <img src="{{asset('asset/img/Checkmark.png')}}" alt="Checkmark" loading="lazy" width="100px" class="mb-3">
                     <h5>berhasil</h5>
-                    <p class="mb-0">Pesanan sedang diproses</p>
-                    <p>silahkan tunggu</p>
+                    <p class="mb-0">Pesanan berhasil di proses</p>
+                    <p>silahkan bayar dikasir</p>
                 </div>
             </div>
         </div>

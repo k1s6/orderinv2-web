@@ -298,11 +298,11 @@ function confirmOrder() {
                     Swal.fire({
                         icon: 'success',
                         title: 'Berhasil!',
-                        text: response.message || 'Transaction successfully created.', // Display API response message
+                        text: 'Pesanan berhasil di proses silahkan bayar dikasir', // Display API response message
                         confirmButtonText: 'OK'
                     }).then(() => {
-                        localStorage.removeItem('cart'); // Clear cart data from localStorage
-                        localStorage.removeItem('customerName'); // Clear customerName from localStorage
+                        // localStorage.removeItem('cart'); // Clear cart data from localStorage
+                        // localStorage.removeItem('customerName'); // Clear customerName from localStorage
                         window.location.href = "{{ route('frontend.berhasil') }}";
                     });
                 },

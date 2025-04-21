@@ -64,7 +64,7 @@ class TransactionController extends Controller
 
             DB::commit();
 
-            return response()->json(['message' => 'Transaction successfully created'], 201);
+            return response()->json(['message' => 'Transaction successfully created '], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             // Log the error message for debugging

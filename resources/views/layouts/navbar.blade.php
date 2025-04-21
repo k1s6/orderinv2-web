@@ -1,5 +1,5 @@
 <nav class="navbar border navbar-expand-lg navbar-light bg-white sticky-top">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="{{ asset('asset/img/orderin.png') }}" alt="Brand Logo" height="30">
         </a>
