@@ -13,7 +13,7 @@ class makananTest extends TestCase
     public function test_example()
     {
         $response = $this->getJson('/api/getProduct');
-        print_r($response->getContent());
+        // print_r($response->getContent());
         // Periksa status respons
         $response->assertStatus(200);
     }
