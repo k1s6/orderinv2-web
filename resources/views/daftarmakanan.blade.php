@@ -31,8 +31,8 @@
                                         </div>
                                     </div>
 
-                                    <img class="card-img-top px-3 pt-2" src="asset/img/{{ $food->gambar_product }}"
-                                        alt="Foto Makanan" loading="lazy" />
+                                    <img class="card-img px-3 pt-2 " src="asset/img/{{ $food->gambar_product }}"
+                                        alt="Foto Makanan" loading="lazy" width="50px"/>
                                     <!-- Product details-->
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
