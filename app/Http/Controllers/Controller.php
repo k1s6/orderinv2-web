@@ -17,4 +17,21 @@ class Controller extends BaseController
 
         return response()->json($foods);
     }
+
+    public function getImage($id)
+    {
+        $product = Product::find($id);
+
+        if ($product) {
+            return response()->json([
+                'status' => 'success',
+                'image' => $product->gambar_product,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'Product not found',
+            ], 404);
+        }
+    }
 }

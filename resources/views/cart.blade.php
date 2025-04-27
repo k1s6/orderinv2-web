@@ -103,23 +103,25 @@ if (storedCart) {
         itemMap.forEach(item => {
             const productInfo = document.createElement('tr');
             productInfo.innerHTML = `
-            <td><img src="${item.image}" alt="${item.name}" class="img-fluid" style="max-width: 50px;"></td>
-                    <td>
-                        ${item.name}<br>
-                        <button class="btn btn-sm btn-danger mt-1 delete-item" data-id="${item.id}">
-                            <i class="bi bi-trash"></i> Hapus
+                <td>
+                    <img src="" alt="${item.name}" class="img-fluid product-image" style="max-width: 60px;" data-id="${item.id}" loading="lazy">
+                </td>
+                <td>
+                    ${item.name}<br>
+                    <button class="btn btn-sm btn-danger mt-1 delete-item" data-id="${item.id}">
+                        <i class="bi bi-trash"></i> Hapus
+                    </button>
+                </td>
+                <td style="width:15%;"> <!-- Set fixed width for the third column -->
+                    <div class="input-group align-items-center">
+                        <input type="text" class="qty-input form-control text-center" maxlength="2" max="10" id="qty_${item.id}" value="${item.quantity}" disabled>
+                        <button class="btn btn-warning edit-pencil" type="button" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <i class="bi bi-pencil"></i>
                         </button>
-                    </td>
-                    <td style="width:15%;"> <!-- Set fixed width for the third column -->
-                        <div class="input-group align-items-center">
-                            <input type="text" class="qty-input form-control text-center" maxlength="2" max="10" id="qty_${item.id}" value="${item.quantity}" disabled>
-                            <button class="btn btn-warning edit-pencil" type="button" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                        </div>
-                        </td>
-                    <td class="text-end">Rp.${item.price * item.quantity}</td>
-                    `;
+                    </div>
+                </td>
+                <td class="text-end">Rp.${item.price * item.quantity}</td>
+            `;
             tbody.appendChild(productInfo);
 
             // Add a row for the note input
@@ -134,6 +136,23 @@ if (storedCart) {
 
             totalPrice += item.price * item.quantity; // Update total price
             totalItems += item.quantity; // Update total items
+
+            // Fetch and set the product image immediately
+            fetch(`{{ url('api/product/image') }}/${item.id}`)
+                .then(response => response.json())
+                .then(data => {
+                    const imgElement = tbody.querySelector(`.product-image[data-id="${item.id}"]`);
+                    if (data && data.image) {
+                        imgElement.src = `{{ asset('asset/img') }}/${data.image}`; // Set the image source from API response
+                    } else {
+                        imgElement.src = '{{ asset('asset/img/default-image.jpg') }}'; // Fallback to a default image
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching product image:', error);
+                    const imgElement = tbody.querySelector(`.product-image[data-id="${item.id}"]`);
+                    imgElement.src = '{{ asset('asset/img/default-image.jpg') }}'; // Fallback to a default image in case of error
+                });
         });
 
         document.getElementById('total-price').textContent = `Rp.${totalPrice}`;
@@ -167,7 +186,7 @@ if (storedCart) {
                 inputValue: item.quantity,
                 inputAttributes: {
                     min: 1,
-                    max: 10,
+                    max: 50,
                     step: 1
                 },
                 showCancelButton: true,

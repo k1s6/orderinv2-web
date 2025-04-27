@@ -70,7 +70,15 @@ if (redirectButton) {
 window.addEventListener('load', function() {
     initializeCart();
 
-    // Event listener untuk menambahkan produk ke keranjang saat tombol produk diklik
+    // Fungsi untuk memperbarui semua elemen input dengan ID yang sama
+    function updateAllQtyInputs(productId, newValue) {
+        const qtyInputs = document.querySelectorAll(`.qty-input[id="qty_${productId}"]`);
+        qtyInputs.forEach(input => {
+            input.value = newValue;
+        });
+    }
+
+    // Event listener untuk menambahkan produk ke keranjang
     document.querySelectorAll('.btn-warning[id^="buttonPlus"]').forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault(); // Mencegah perilaku default tombol (jika ada)
@@ -83,12 +91,13 @@ window.addEventListener('load', function() {
                 // Increment the value of the quantity input field
                 let currentValue = parseInt(qtyInput.value) || 0; // Get the current value or default to 0 if NaN
                 let incrementedValue = currentValue + 1; // Increment the value
-                qtyInput.value = incrementedValue; // Update the input field with the new value
+                updateAllQtyInputs(productId, incrementedValue); // Update all inputs with the same ID
             }
             addProductToCart(productId, productName, productPrice); // Memanggil fungsi addProductToCart
         });
     });
 
+    // Event listener untuk mengurangi produk dari keranjang
     document.querySelectorAll('.btn-warning[id^="buttonMin"]').forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault();
@@ -101,7 +110,7 @@ window.addEventListener('load', function() {
                 let currentValue = parseInt(qtyInput.value) || 0; // Get the current value or default to 0 if NaN
                 if (currentValue > 0) { // Check if the current value is greater than 0
                     let decrementedValue = currentValue - 1; // Decrement the value
-                    qtyInput.value = decrementedValue; // Update the input field with the new value
+                    updateAllQtyInputs(productId, decrementedValue); // Update all inputs with the same ID
                 }
             }
         });

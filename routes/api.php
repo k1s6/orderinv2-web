@@ -36,9 +36,10 @@ Route::group(['prefix' => '/apimobileorderin'], function () {
     Route::get('/transaction/{status}', [TransactionController::class, 'showPesananIn']);
     Route::put('/transactionupdate/{id}', [TransactionController::class, 'updatePesanan']);
     Route::get('/user/userdump', [MobileUserController::class, 'addUserData']);
-    Route::post('/cart/post', [CartController::class, 'store'])->name('cart.transactioninsert');
+    // Route::post('/cart/post', [CartController::class, 'store'])->name('cart.transactioninsert');
 });
 
 // Route::post('/apimobileorderin/login', [LoginMobileController::class, 'login']);
 Route::get('/getProduct', [Controller::class, 'getProduct']);
 Route::post('/cart/post', [TransactionControllerWeb::class, 'store']);
+Route::get('product/image/{id}', [Controller::class, 'getImage']);
