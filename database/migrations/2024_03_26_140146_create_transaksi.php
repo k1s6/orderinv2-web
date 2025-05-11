@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('kode_transaksi');
             $table->string('nama')->nullable(false);
             // $table->dateTime('waktu')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->enum('status', ['diterima', 'ditolak', 'dikonfirmasi'])->nullable(false);
+            $table->enum('status', ['diterima', 'ditolak', 'dikonfirmasi', 'selesai'])->nullable(false);
             $table->integer('jumlah')->nullable(false);
             $table->bigInteger('total')->nullable(false);
             $table->String('catatan')->nullable(true);
